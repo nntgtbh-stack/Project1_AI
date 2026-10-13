@@ -378,6 +378,23 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
+
+    position, visited = state
+
+    unvisited = []
+
+    for i, corner in enumerate(corners):
+        if not visited[i]:
+            unvisited.append(corner)
+
+    if not unvisited:
+        return 0
+
+    def manHattanDis(a,b):
+        return abs(a[0] - b[0]) + abs(a[1]-b[1])
+
+    return max(manHattanDis(position,corner) for corner in unvisited)
+
     return 0 # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
